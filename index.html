@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PorcunaNet - IT Instructor & Enthusiast</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <title>PorcunaNet - Pip-Boy 3000</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,59 +12,137 @@
             box-sizing: border-box;
         }
 
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.95; }
+        }
+
+        @keyframes textGlow {
+            0%, 100% { text-shadow: 0 0 10px #0f0, 0 0 20px #0f0, 0 0 30px #0f0; }
+            50% { text-shadow: 0 0 5px #0f0, 0 0 10px #0f0, 0 0 15px #0f0; }
+        }
+
+        @keyframes slideIn {
+            from { 
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
         body {
-            font-family: 'Press Start 2P', cursive;
-            background-color: #d3d3d3;
-            color: #333;
+            font-family: 'Share Tech Mono', monospace;
+            background: #0a0a0a;
+            color: #00ff41;
             line-height: 1.8;
             min-height: 100vh;
-            display: grid;
-            grid-template-rows: auto 1fr auto;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(0, 255, 65, 0.03) 0px,
+                    transparent 1px,
+                    transparent 2px,
+                    rgba(0, 255, 65, 0.03) 3px
+                );
+            pointer-events: none;
+            z-index: 1000;
+            animation: flicker 0.15s infinite;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(transparent, rgba(0, 255, 65, 0.3), transparent);
+            animation: scanline 6s linear infinite;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .crt-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+            pointer-events: none;
+            z-index: 998;
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 30px;
             width: 100%;
+            position: relative;
+            z-index: 1;
         }
 
         /* Header */
         header {
-            background-color: #4a4a4a;
-            padding: 20px 0;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            background: rgba(0, 20, 0, 0.9);
+            padding: 30px 0;
+            border-bottom: 3px solid #00ff41;
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.3);
             position: sticky;
             top: 0;
             z-index: 100;
+            backdrop-filter: blur(5px);
         }
 
         .header-content {
             display: grid;
             grid-template-columns: auto 1fr;
             align-items: center;
-            gap: 30px;
+            gap: 40px;
         }
 
         .logo-section {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 25px;
+            animation: slideIn 0.8s ease-out;
         }
 
         .logo {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
-            border: 4px solid #00ff00;
+            border: 4px solid #00ff41;
             object-fit: cover;
-            box-shadow: 0 0 20px rgba(0,255,0,0.5);
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.6);
+            filter: brightness(1.1) contrast(1.2);
         }
 
         .site-title {
-            font-size: 1.2rem;
-            color: #00ff00;
-            text-shadow: 2px 2px 0px #000;
+            font-size: 2rem;
+            color: #060606;
+            text-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
+            animation: textGlow 2s ease-in-out infinite;
+            letter-spacing: 2px;
         }
 
         nav {
@@ -79,56 +157,87 @@
         }
 
         nav a {
-            color: #fff;
+            color: #00ff41;
             text-decoration: none;
-            font-size: 0.6rem;
+            font-size: 1.1rem;
             transition: all 0.3s;
-            padding: 8px 15px;
-            border: 2px solid transparent;
+            padding: 12px 20px;
+            border: 2px solid #00ff41;
+            background: rgba(0, 255, 65, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav a::before {
+            content: '>';
+            position: absolute;
+            left: -20px;
+            transition: left 0.3s;
+        }
+
+        nav a:hover::before {
+            left: 5px;
         }
 
         nav a:hover {
-            color: #00ff00;
-            border: 2px solid #00ff00;
-            box-shadow: 0 0 10px rgba(0,255,0,0.5);
+            background: rgba(0, 255, 65, 0.15);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+            transform: translateY(-2px);
         }
 
         /* Main Content */
         main {
-            padding: 40px 0;
+            padding: 60px 0;
         }
 
         section {
-            margin-bottom: 60px;
-            background-color: #fff;
-            padding: 40px;
-            border: 4px solid #4a4a4a;
-            box-shadow: 8px 8px 0px #333;
+            margin-bottom: 80px;
+            background: rgba(0, 20, 0, 0.8);
+            padding: 50px;
+            border: 3px solid #00ff41;
+            box-shadow: 0 0 40px rgba(0, 255, 65, 0.3), inset 0 0 40px rgba(0, 255, 65, 0.05);
+            position: relative;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ff41, transparent);
         }
 
         h2 {
-            font-size: 1.5rem;
-            color: #4a4a4a;
-            margin-bottom: 30px;
+            font-size: 2.2rem;
+            color: #060606;
+            margin-bottom: 40px;
             text-align: center;
-            text-shadow: 3px 3px 0px #00ff00;
+            text-shadow: 0 0 15px #0f0, 0 0 30px #0f0;
+            letter-spacing: 3px;
+            animation: textGlow 2s ease-in-out infinite;
         }
 
         /* Introduction */
         .intro-text {
-            font-size: 0.7rem;
+            font-size: 1.3rem;
             text-align: center;
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
+            line-height: 2;
+            text-shadow: 0 0 5px #0f0;
         }
 
         /* Projects Carousel */
         .carousel {
             position: relative;
             overflow: hidden;
-            background-color: #000;
-            border: 4px solid #4a4a4a;
-            min-height: 400px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 3px solid #00ff41;
+            min-height: 500px;
+            box-shadow: inset 0 0 30px rgba(0, 255, 65, 0.2);
         }
 
         .carousel-track {
@@ -138,139 +247,214 @@
 
         .project-card {
             min-width: 100%;
-            padding: 40px;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-            color: #00ff00;
+            padding: 50px;
+            background: rgba(0, 20, 0, 0.9);
+            color: #00ff41;
         }
 
         .project-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 0px #000;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
+            letter-spacing: 2px;
+            color: #060606;
+        }
+
+        .project-card h3::before {
+            content: '> ';
+            animation: textGlow 1.5s ease-in-out infinite;
         }
 
         .project-card a {
-            color: #00ff00;
+            color: #060606;
             text-decoration: none;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
         }
 
         .project-card a:hover {
-            text-decoration: underline;
-            font-style: italic;
+            border-bottom: 2px solid #00ff41;
+            text-shadow: 0 0 10px #0f0;
         }
 
         .project-card p {
-            font-size: 0.6rem;
-            line-height: 1.8;
-            margin-bottom: 20px;
+            font-size: 1.2rem;
+            line-height: 2;
+            margin-bottom: 25px;
+            text-shadow: 0 0 5px #0f0;
         }
 
         .carousel-controls {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
+            gap: 30px;
+            margin-top: 30px;
         }
 
         .carousel-btn {
-            background-color: #4a4a4a;
-            color: #00ff00;
-            border: 3px solid #00ff00;
-            padding: 10px 20px;
-            font-family: 'Press Start 2P', cursive;
-            font-size: 0.6rem;
+            background: rgba(0, 255, 65, 0.1);
+            color: #00ff41;
+            border: 3px solid #00ff41;
+            padding: 15px 30px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.1rem;
             cursor: pointer;
             transition: all 0.3s;
+            text-shadow: 0 0 5px #0f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(0, 255, 65, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s;
+            border-radius: 50%;
+        }
+
+        .carousel-btn:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .carousel-btn:hover {
-            background-color: #00ff00;
-            color: #000;
-            box-shadow: 0 0 15px rgba(0,255,0,0.8);
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.8);
+            transform: translateY(-3px);
+        }
+
+        .carousel-btn span {
+            position: relative;
+            z-index: 1;
         }
 
         /* Skills */
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 30px;
-            margin-top: 30px;
+            margin-top: 40px;
         }
 
         .skill-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
-            padding: 20px;
-            background-color: #f0f0f0;
-            border: 3px solid #4a4a4a;
+            gap: 20px;
+            padding: 30px;
+            background: rgba(0, 255, 65, 0.05);
+            border: 3px solid #00ff41;
             transition: all 0.3s;
+            position: relative;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .skill-item::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, transparent, #00ff41, transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .skill-item:hover::before {
+            opacity: 0.3;
         }
 
         .skill-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 5px 5px 0px #00ff00;
-            border-color: #00ff00;
+            transform: translateY(-8px);
+            box-shadow: 0 0 40px rgba(0, 255, 65, 0.6);
+            background: rgba(0, 255, 65, 0.1);
         }
 
         .skill-icon {
-            width: 60px;
-            height: 60px;
-            background-color: #4a4a4a;
+            width: 80px;
+            height: 80px;
+            background: rgba(0, 0, 0, 0.8);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #00ff00;
-            font-size: 0.8rem;
-            border: 2px solid #00ff00;
+            color: #00ff41;
+            font-size: 1.5rem;
+            border: 3px solid #00ff41;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.4);
+            text-shadow: 0 0 10px #0f0;
         }
 
         .skill-name {
-            font-size: 0.5rem;
+            font-size: 1.1rem;
             text-align: center;
-            color: #4a4a4a;
+            color: #00ff41;
+            text-shadow: 0 0 5px #0f0;
         }
 
         /* Footer */
         footer {
-            background-color: #2a2a2a;
-            color: #00ff00;
-            padding: 30px 0;
+            background: rgba(0, 20, 0, 0.95);
+            color: #00ff41;
+            padding: 50px 0;
             text-align: center;
-            border-top: 4px solid #00ff00;
+            border-top: 3px solid #00ff41;
+            box-shadow: 0 0 40px rgba(0, 255, 65, 0.3);
         }
 
         .social-icons {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            margin-bottom: 20px;
+            gap: 40px;
+            margin-bottom: 30px;
         }
 
         .social-icon {
-            width: 50px;
-            height: 50px;
-            background-color: #4a4a4a;
-            border: 3px solid #00ff00;
+            width: 70px;
+            height: 70px;
+            background: rgba(0, 255, 65, 0.1);
+            border: 3px solid #00ff41;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #00ff00;
+            color: #00ff41;
             text-decoration: none;
-            font-size: 1.2rem;
+            font-size: 1.8rem;
             transition: all 0.3s;
+            text-shadow: 0 0 10px #0f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0, 255, 65, 0.3) 0%, transparent 70%);
+            transform: scale(0);
+            transition: transform 0.3s;
+        }
+
+        .social-icon:hover::before {
+            transform: scale(1);
         }
 
         .social-icon:hover {
-            background-color: #00ff00;
-            color: #000;
-            box-shadow: 0 0 20px rgba(0,255,0,0.8);
+            box-shadow: 0 0 40px rgba(0, 255, 65, 0.8);
+            transform: translateY(-5px);
         }
 
         .copyright {
-            font-size: 0.5rem;
-            margin-top: 20px;
+            font-size: 1rem;
+            margin-top: 30px;
+            text-shadow: 0 0 5px #0f0;
         }
 
         /* Responsive Design */
@@ -290,75 +474,103 @@
 
             nav ul {
                 justify-content: center;
+                gap: 15px;
             }
 
             .site-title {
-                font-size: 0.9rem;
+                font-size: 1.5rem;
             }
 
             nav a {
-                font-size: 0.5rem;
+                font-size: 0.9rem;
+                padding: 10px 15px;
             }
 
             h2 {
-                font-size: 1rem;
+                font-size: 1.6rem;
             }
 
             .intro-text {
-                font-size: 0.6rem;
+                font-size: 1.1rem;
             }
 
             section {
-                padding: 20px;
+                padding: 30px;
             }
 
             .skills-grid {
-                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-                gap: 15px;
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                gap: 20px;
+            }
+
+            .project-card {
+                padding: 30px;
+            }
+
+            .project-card h3 {
+                font-size: 1.4rem;
+            }
+
+            .project-card p {
+                font-size: 1rem;
             }
         }
 
         @media (max-width: 480px) {
             .site-title {
-                font-size: 0.7rem;
+                font-size: 1.2rem;
             }
 
             nav a {
-                font-size: 0.4rem;
-                padding: 5px 10px;
+                font-size: 0.8rem;
+                padding: 8px 12px;
             }
 
             .logo {
-                width: 60px;
-                height: 60px;
+                width: 80px;
+                height: 80px;
             }
 
             .skills-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+
+            .intro-text {
+                font-size: 1rem;
+            }
         }
 
-        @media (max-width: 768px) {
-  .header-content { grid-template-columns: 1fr; }
-  .carousel { grid-auto-columns: 90%; }
-}
+        /* Terminal boot sequence */
+        @keyframes bootSequence {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
 
+        body {
+            animation: bootSequence 0.5s ease-in;
+        }
     </style>
 </head>
 <body>
+    <div class="crt-overlay"></div>
+    
     <header>
         <div class="container">
             <div class="header-content">
                 <div class="logo-section">
                     <img src="img/patrick.jpeg" alt="PorcunaNet Logo" class="logo">
-                    <h1 class="site-title">PorcunaNet</h1>
+                    <h1 class="site-title">PORCUNANET</h1>
                 </div>
                 <nav>
                     <ul>
-                        <li><a href="#intro">About</a></li>
-                        <li><a href="#projects">Projects</a></li>
-                        <li><a href="#skills">Skills</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#intro">ABOUT</a></li>
+                        <li><a href="#projects">PROJECTS</a></li>
+                        <li><a href="#skills">SKILLS</a></li>
+                        <li><a href="#contact">CONTACT</a></li>
                     </ul>
                 </nav>
             </div>
@@ -368,81 +580,81 @@
     <main>
         <div class="container">
             <section id="intro">
-                <h2>// About Me</h2>
+                <h2>// ABOUT_ME</h2>
                 <p class="intro-text">
                     Hello! I'm an IT instructor and technology enthusiast with a passion for teaching and exploring the ever-evolving world of technology. With expertise spanning cloud computing, web development, and databases I help others navigate the digital landscape. Empowering students with technical knowledge, I'm dedicated to making technology accessible and exciting for everyone.
                 </p>
             </section>
 
             <section id="projects">
-                <h2>// Projects</h2>
+                <h2>// PROJECTS_DATABASE</h2>
                 <div class="carousel">
                     <div class="carousel-track">
                         <div class="project-card">
-                            <h3>&gt; <a href="https://delightful-pond-04c67721e.3.azurestaticapps.net/" target="_blank">The Orthodox Church</a></h3>
+                            <h3><a href="https://delightful-pond-04c67721e.3.azurestaticapps.net/" target="_blank">The Orthodox Church</a></h3>
                             <p>Created a webpage about the Orthodox Christian Church</p>
                             <p>Tech Stack: HTML, CSS, JavaScript, GitHub & Microsoft Azure</p>
                         </div>
                         <div class="project-card">
-                            <h3>&gt; <a href="https://victorious-sand-0124d0a1e.3.azurestaticapps.net/" target="_blank">Early Church Councils</a></h3>
+                            <h3><a href="https://victorious-sand-0124d0a1e.3.azurestaticapps.net/" target="_blank">Early Church Councils</a></h3>
                             <p>Created a webpage dedicated to Christian Early Church Counsils.</p>
                             <p>Tech Stack: HTML, CSS, JavaScript, GitHub & Microsoft Azure</p>
                         </div>
                         <div class="project-card">
-                            <h3>&gt; <a href="https://calm-pebble-009e64210.2.azurestaticapps.net/" target="_blank">Christian Saints</a></h3>
+                            <h3><a href="https://calm-pebble-009e64210.2.azurestaticapps.net/" target="_blank">Christian Saints</a></h3>
                             <p>Created a webpage dedicated to Christian Saints. Will be updated throught my spiritual journey. Glory be to Christ!</p>
                             <p>Tech Stack: HTML, CSS, JavaScript, GitHub & Microsoft Azure</p>
                         </div>
                         <div class="project-card">
-                            <h3>&gt; <a href="https://wonderful-pond-064747210.1.azurestaticapps.net/" target="_blank">The Didache - A Christian Handbook</a></h3>
+                            <h3><a href="https://wonderful-pond-064747210.1.azurestaticapps.net/" target="_blank">The Didache - A Christian Handbook</a></h3>
                             <p>Created a webpage dedicated to The Didache, The Didache is an early Christian manual of teachings and church practices, likely written in the late first or early second century, offering guidance on morality, rituals, and church organization.</p>
                             <p>Tech Stack: HTML, CSS, & JavaScript, GitHub & Microsoft Azure</p>
                         </div>
                          <div class="project-card">
-                            <h3>&gt; <a href="https://black-flower-0512a5c10.3.azurestaticapps.net/" target="_blank">Baptism & Chrismation in the Orthodox Church</a></h3>
+                            <h3><a href="https://black-flower-0512a5c10.3.azurestaticapps.net/" target="_blank">Baptism & Chrismation in the Orthodox Church</a></h3>
                             <p>Created a webpage to about Orthodox Church Baptism & Chrismation</p>
                             <p>Tech Stack: HTML, CSS, & JavaScript, GitHub & Microsoft Azure</p>
                         </div>
                         <div class="project-card">
-                            <h3>&gt; <a href="https://thankful-stone-051e70310.1.azurestaticapps.net" target="_blank">Orthodox Church Map Finder</a></h3>
+                            <h3><a href="https://thankful-stone-051e70310.1.azurestaticapps.net" target="_blank">Orthodox Church Map Finder</a></h3>
                             <p>Created a webpage that will showcase churches that are near in the users area. Max radius 50 miles.</p>
                             <p>Tech Stack: HTML, CSS, & JavaScript, GitHub & Microsoft Azure</p>
                         </div>
                         <div class="project-card">
-                            <h3>&gt; <a href="https://purple-meadow-033f41610.3.azurestaticapps.net/" target="_blank">Prayers in Times of Need</a></h3>
+                            <h3><a href="https://purple-meadow-033f41610.3.azurestaticapps.net/" target="_blank">Prayers in Times of Need</a></h3>
                             <p>Created a webpage Prayers in Times of Need. Orthodox Christian Faith.</p>
                             <p>Tech Stack: HTML, CSS, & JavaScript, GitHub & Microsoft Azure</p>
                         </div>
                          <div class="project-card">
-                            <h3>&gt; <a href="https://kind-dune-0971ca410.3.azurestaticapps.net/" target="_blank">The Evolution of Computing</a></h3>
+                            <h3><a href="https://kind-dune-0971ca410.3.azurestaticapps.net/" target="_blank">The Evolution of Computing</a></h3>
                             <p>Created a webpage to teach The Evolution of Computing.</p>
                             <p>Tech Stack: HTML, CSS, & JavaScript, GitHub & Microsoft Azure</p>
                         </div>
                         <div class="project-card">
-                            <h3>&gt; <a href="https://red-water-0e0ce0610.2.azurestaticapps.net/" target="_blank">Computer Basics Tutorial</a></h3>
+                            <h3><a href="https://red-water-0e0ce0610.2.azurestaticapps.net/" target="_blank">Computer Basics Tutorial</a></h3>
                             <p>Created a webpage to teach basic computer skills to beginners.</p>
                             <p>Tech Stack: HTML, CSS, & JavaScript, GitHub & Microsoft Azure</p>
                         </div>
                         <div class="project-card">
-                            <h3>&gt; <a href="https://mango-desert-08327be10.2.azurestaticapps.net/" target="_blank">Web Development beginners tutorial</a></h3>
+                            <h3><a href="https://mango-desert-08327be10.2.azurestaticapps.net/" target="_blank">Web Development beginners tutorial</a></h3>
                             <p>Created a webpage to teach basic HTML to beginners.</p>
                             <p>Tech Stack: HTML, CSS, & JavaScript, GitHub & Microsoft Azure</p>
                         </div>
                          <div class="project-card">
-                            <h3>&gt; <a href="https://ambitious-smoke-06565fd10.3.azurestaticapps.net/" target="_blank">Computer Hardware tutorial</a></h3>
+                            <h3><a href="https://ambitious-smoke-06565fd10.3.azurestaticapps.net/" target="_blank">Computer Hardware tutorial</a></h3>
                             <p>Created a webpage to teach basic Computer Hardware to beginners.</p>
                             <p>Tech Stack: HTML, CSS, & JavaScript, GitHub & Microsoft Azure</p>
                         </div>
                     </div>
                 </div>
                 <div class="carousel-controls">
-                    <button class="carousel-btn" onclick="moveCarousel(-1)">◄ Prev</button>
-                    <button class="carousel-btn" onclick="moveCarousel(1)">Next ►</button>
+                    <button class="carousel-btn" onclick="moveCarousel(-1)"><span>◄ PREV</span></button>
+                    <button class="carousel-btn" onclick="moveCarousel(1)"><span>NEXT ►</span></button>
                 </div>
             </section>
 
             <section id="skills">
-                <h2>// Skills & Certifications</h2>
+                <h2>// SKILLS_&_CERTIFICATIONS</h2>
                 <div class="skills-grid">
                     <a href="https://learn.microsoft.com/en-us/certifications/" target="_blank" class="skill-item">
                         <div class="skill-icon">AZ</div>
@@ -497,7 +709,7 @@
                 <a href="https://x.com/Porcuna_net" target="_blank" class="social-icon" aria-label="Twitter">X</a>
                 <a href="https://www.youtube.com/@PorcunaNet" target="_blank" class="social-icon" aria-label="YouTube">Y</a>
             </div>
-            <p class="copyright">© 2025 PorcunaNet. All rights reserved.</p>
+            <p class="copyright">© 2025 PORCUNANET. ALL RIGHTS RESERVED.</p>
         </div>
     </footer>
 
@@ -518,6 +730,12 @@
             const track = document.querySelector('.carousel-track');
             track.style.transform = `translateX(-${currentSlide * 100}%)`;
         }
+
+        // Add keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') moveCarousel(-1);
+            if (e.key === 'ArrowRight') moveCarousel(1);
+        });
     </script>
 </body>
 </html>
