@@ -1,158 +1,413 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio 2025</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="app.js" defer></script>
+    <title>Terminal Portfolio 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0c0c0c;
+            font-family: 'Courier New', monospace;
+            color: #00ff00;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .terminal {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.1);
+        }
+
+        .terminal-header {
+            background: #2d2d2d;
+            padding: 10px 15px;
+            border-bottom: 1px solid #444;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .btn-close { background: #ff5f56; }
+        .btn-minimize { background: #ffbd2e; }
+        .btn-maximize { background: #27c93f; }
+
+        .terminal-title {
+            flex: 1;
+            text-align: center;
+            color: #888;
+            font-size: 12px;
+        }
+
+        .terminal-body {
+            padding: 20px;
+            min-height: 500px;
+        }
+
+        .prompt {
+            color: #00ff00;
+            margin-bottom: 10px;
+        }
+
+        .prompt-symbol {
+            color: #00d9ff;
+        }
+
+        .output {
+            margin-bottom: 20px;
+            color: #00ff00;
+        }
+
+        .command-input-line {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .command-input {
+            background: transparent;
+            border: none;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            outline: none;
+            flex: 1;
+            padding: 5px;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 18px;
+            background: #00ff00;
+            animation: blink 1s infinite;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+
+        .ascii-art {
+            color: #00d9ff;
+            font-size: 10px;
+            line-height: 1.2;
+            margin: 20px 0;
+        }
+
+        .menu-item {
+            color: #ffbd2e;
+            cursor: pointer;
+            padding: 5px 0;
+            transition: all 0.2s;
+        }
+
+        .menu-item:hover {
+            color: #fff;
+            padding-left: 10px;
+        }
+
+        .project-entry {
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+
+        .project-title {
+            color: #00d9ff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .project-title:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        .project-desc {
+            color: #888;
+            margin-left: 5px;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background: #2d2d2d;
+            color: #00d9ff;
+            padding: 5px 10px;
+            margin: 5px 5px 5px 0;
+            border: 1px solid #444;
+            border-radius: 3px;
+        }
+
+        .social-link {
+            color: #ffbd2e;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+
+        .social-link:hover {
+            color: #fff;
+        }
+
+        .section-title {
+            color: #00d9ff;
+            font-size: 18px;
+            margin: 25px 0 15px 0;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
+        }
+
+        .command-hint {
+            color: #666;
+            font-style: italic;
+        }
+
+        .error {
+            color: #ff5f56;
+        }
+
+        .success {
+            color: #27c93f;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .typing {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <header>
-            <div class="profile-pic" style="background-image: url('images/Soothe-Me.jpg');"></div>
-            <div></div>
-            <nav>
-                <a href="#home">Home</a>
-                <a href="#projects">Projects</a>
-            </nav>
-        </header>
-
-        <!-- Introduction -->
-        <section class="intro" id="home">
-            <h1>Welcome to My Portfolio</h1>
-            <p>As a passionate tech enthusiast, I thrive on teaching others about computers, technology, and code, while finding joy in exploring and working with data."</p>
-        </section>
-
-        <!-- Projects Carousel -->
-        <section class="projects" id="projects">
-            <h2>Featured Projects</h2>
-            <div class="carousel">
-                <div class="carousel-track">
-                  
-                  <div class="project-card">
-                    <h3><a href="https://porcunanet.github.io/Frontend-Mentor---Single-Price-Grid/" target="_blank">FrontendMentor - Single Price Grid</a></h3>
-                    <p>Frontend Mentor project of a single price grid component.</p>
-                  </div>
-
-                  <div class="project-card">
-                      <h3><a href="https://github.com/Porcunanet/3-column-preview-card-component-main.git" target="_blank">FrontendMentor - 3 Column preview card</a></h3>
-                        <p>Frontend Mentor project of a 3 Column preview card component.</p>
-                    </div>
-                  
-                   <div class="project-card">
-                      <h3><a href="https://porcunanet.github.io/Frontend-Mentor---Recipe-Page/" target="_blank">FrontendMentor - Recipe Page</a></h3>
-                        <p>Frontend Mentor project of a Recipe Page.</p>
-                    </div> 
-
-                    <div class="project-card">
-                        <h3><a href="https://porcunanet.github.io/FrontendMentor_social-links-profile-main/" target="_blank">Frontend Mentor - Social links profile main</a></h3>
-                        <p>Frontend Mentor project of a Social media profile in dark mode.</p>
-                    </div>
-
-                    <div class="project-card">
-                        <h3><a href="https://github.com/Porcunanet/System-Report-tool-for-MacOS-Linux.git" target="_blank">System Report script for MacOS, Linux, & Windows</a></h3>
-                        <p>A script use to get System Information on MacOS, Linux, and Windows. Shell Script and Powershell Script.</p>
-                    </div>
-
-                    <div class="project-card">
-                        <h3><a href="https://ambitious-smoke-06565fd10.3.azurestaticapps.net/" target="_blank">Computer Hardware Tutorial</a></h3>
-                        <p>Webpage dedicated to anyone interested in learning about computer hardware</p>
-                    </div>
-                    <div class="project-card">
-                        <h3><a href="https://mango-desert-08327be10.2.azurestaticapps.net/" target="_blank">Web Development for Beginners</a></h3>
-                        <p>Webpage dedicated to anyone interested in learning about Web Development for beginners</p>
-                    </div>
-                    <div class="project-card">
-                        <h3><a href="https://example.com/project-gamma" target="_blank">Computer Basics for beginners</a></h3>
-                        <p>Webpage dedicated to anyone interested in learning about computer basics for beginners. </p>
-                    </div>
-                    <div class="project-card">
-                        <h3><a href="https://example.com/project-gamma" target="_blank">The Evolution of Computing</a></h3>
-                        <p>An information page about the evolution of computing</p>
-                    </div>
-                    <div class="project-card">
-                        <h3><a href="https://purple-meadow-033f41610.3.azurestaticapps.net/" target="_blank">Prayers in Times of Need</a></h3>
-                        <p>Created a webpage Prayers in Times of Need. Orthodox Christian Faith.</p>
-                    </div>
-                    <div class="project-card">
-                        <h3><a href="https://thankful-stone-051e70310.1.azurestaticapps.net/" target="_blank">Orthodox Church Map Finder</a></h3>
-                        <p>Created a webpage that will showcase churches that are near in the users area. Max radius 50 miles.</p>
-                    </div>
-                    <div class="project-card">
-                        <h3><a href="https://black-flower-0512a5c10.3.azurestaticapps.net/" target="_blank">Baptism & Chrismation in the Orthodox Church</a></h3>
-                        <p>Created a webpage to about Orthodox Church Baptism & Chrismation</p>
-                    </div>
-                      <div class="project-card">
-                        <h3><a href=https://wonderful-pond-064747210.1.azurestaticapps.net/"" target="_blank">The Didache - A Christian Handbook</a></h3>
-                        <p>Created a webpage dedicated to The Didache, The Didache is an early Christian manual of teachings and church practices, likely written in the late first or early second century, offering guidance on morality, rituals, and church organization.</p>
-                    </div>
-                      <div class="project-card">
-                        <h3><a href="https://calm-pebble-009e64210.2.azurestaticapps.net/" target="_blank">Christian Saints</a></h3>
-                        <p>Created a webpage dedicated to Christian Saints. Will be updated throught my spiritual journey. Glory be to Christ!</p>
-                    </div>
-                      <div class="project-card">
-                        <h3><a href="https://victorious-sand-0124d0a1e.3.azurestaticapps.net/" target="_blank">Early Church Councils</a></h3>
-                        <p>Created a webpage dedicated to Christian Early Church Councils.</p>
-                    </div>
-                      <div class="project-card">
-                        <h3><a href="https://delightful-pond-04c67721e.3.azurestaticapps.net/" target="_blank">The Orthodox Church</a></h3>
-                        <p>Created a webpage about the Orthodox Christian Church</p>
-                    </div>
-                    <div class="project-card">
-                        <h3><a href="https://porcunanet.github.io/Interest-in-Orthodoxy/" target="_blank">Interest in Orthodoxy</a></h3>
-                        <p>Created a webpage for people interested in how Orthodox Christian liturgy.</p>
-                    </div>
-
-                    <div class="project-card">
-                        <h3><a href="https://porcunanet.github.io/St.-Nektarios/" target="_blank">St. Nektarios Biography</a></h3>
-                        <p>Created a webpage dedicated to the biography of St. Nektarios.</p>
-                    </div>
-                    
-                    <div class="project-card">
-                        <h3><a href="https://porcunanet.github.io/The-Nativity-/" target="_blank">The Nativity</a></h3>
-                        <p>Created a webpage dedicated to The Nativity: God Becomes Human to Show Us the Way</p>
-                    </div>
-
-
+    <div class="terminal">
+        <div class="terminal-header">
+            <span class="terminal-button btn-close"></span>
+            <span class="terminal-button btn-minimize"></span>
+            <span class="terminal-button btn-maximize"></span>
+            <span class="terminal-title">portfolio@terminal:~</span>
+        </div>
+        <div class="terminal-body" id="terminalBody">
+            <div class="output">
+                <pre class="ascii-art">
+ ____   ___  ____ _____ _____ ___  _     ___ ___  
+|  _ \ / _ \|  _ \_   _|  ___/ _ \| |   |_ _/ _ \ 
+| |_) | | | | |_) || | | |_ | | | | |    | | | | |
+|  __/| |_| |  _ < | | |  _|| |_| | |___ | | |_| |
+|_|    \___/|_| \_\|_| |_|   \___/|_____|___\___/ 
+                                                   
+                </pre>
+                <div class="prompt">Welcome to Portfolio Terminal v2025</div>
+                <div class="prompt">Click on any command below or type it in the prompt:</div>
+                <br>
+                <div class="section-title">Available Commands:</div>
+                <div style="padding-left: 20px;">
+                    <div class="menu-item" onclick="executeCommand('about')">► <span style="color: #00d9ff;">about</span> - Display information about me</div>
+                    <div class="menu-item" onclick="executeCommand('projects')">► <span style="color: #00d9ff;">projects</span> - List all projects</div>
+                    <div class="menu-item" onclick="executeCommand('skills')">► <span style="color: #00d9ff;">skills</span> - Show my skills and expertise</div>
+                    <div class="menu-item" onclick="executeCommand('social')">► <span style="color: #00d9ff;">social</span> - Display social media links</div>
+                    <div class="menu-item" onclick="executeCommand('clear')">► <span style="color: #00d9ff;">clear</span> - Clear the terminal</div>
+                    <div class="menu-item" onclick="executeCommand('help')">► <span style="color: #00d9ff;">help</span> - Show this help message</div>
                 </div>
             </div>
-            <div class="carousel-controls">
-                <button class="carousel-btn" id="prevBtn">‹ Prev</button>
-                <div class="carousel-indicators">
-                    <div class="indicator active" data-index="0"></div>
-                    <div class="indicator" data-index="1"></div>
-                    <div class="indicator" data-index="2"></div>
-                </div>
-                <button class="carousel-btn" id="nextBtn">Next ›</button>
-            </div>
-        </section>
 
-        <!-- Skills -->
-        <section class="skills">
-            <h2>Skills & Expertise</h2>
-            <div class="skills-grid">
-                <div class="skill-item">HTML/CSS</div>
-                <div class="skill-item">JavaScript</div>
-                <div class="skill-item">SQL</div>
-                <div class="skill-item">Node.js</div>
-                <div class="skill-item">Python</div>
-                <div class="skill-item">Git</div>
-                <div class="skill-item">Microsoft Azure</div>
-                <div class="skill-item">Microsoft 365</div>
-            </div>
-        </section>
+            <div id="outputContainer"></div>
 
-        <!-- Footer -->
-        <footer>
-            <a href="https://www.youtube.com/@A_Perch_Of_Birds" class="social-link" target="_blank">YT</a>
-            <a href="https://www.linkedin.com/in/porcuna/" class="social-link" target="_blank">IN</a>
-            <a href="https://github.com/Porcunanet" class="social-link" target="_blank">GH</a>
-            <a href="https://www.instagram.com/a_perch_of_birds/" class="social-link" target="_blank">IG</a>
-        </footer>
+            <div class="command-input-line">
+                <span class="prompt-symbol">guest@portfolio:~$</span>
+                <input type="text" class="command-input" id="commandInput" autofocus autocomplete="off">
+                <span class="cursor"></span>
+            </div>
+        </div>
     </div>
 
+    <script>
+        const commandInput = document.getElementById('commandInput');
+        const outputContainer = document.getElementById('outputContainer');
+        const terminalBody = document.getElementById('terminalBody');
+        let commandHistory = [];
+        let historyIndex = -1;
+
+        const projects = [
+            { name: "FrontendMentor - Single Price Grid", url: "https://porcunanet.github.io/Frontend-Mentor---Single-Price-Grid/", desc: "Frontend Mentor project of a single price grid component." },
+            { name: "FrontendMentor - 3 Column preview card", url: "https://github.com/Porcunanet/3-column-preview-card-component-main.git", desc: "Frontend Mentor project of a 3 Column preview card component." },
+            { name: "FrontendMentor - Recipe Page", url: "https://porcunanet.github.io/Frontend-Mentor---Recipe-Page/", desc: "Frontend Mentor project of a Recipe Page." },
+            { name: "Frontend Mentor - Social links profile main", url: "https://porcunanet.github.io/FrontendMentor_social-links-profile-main/", desc: "Frontend Mentor project of a Social media profile in dark mode." },
+            { name: "System Report script", url: "https://github.com/Porcunanet/System-Report-tool-for-MacOS-Linux.git", desc: "A script use to get System Information on MacOS, Linux, and Windows." },
+            { name: "Computer Hardware Tutorial", url: "https://ambitious-smoke-06565fd10.3.azurestaticapps.net/", desc: "Webpage dedicated to anyone interested in learning about computer hardware" },
+            { name: "Web Development for Beginners", url: "https://mango-desert-08327be10.2.azurestaticapps.net/", desc: "Webpage dedicated to anyone interested in learning about Web Development for beginners" },
+            { name: "Prayers in Times of Need", url: "https://purple-meadow-033f41610.3.azurestaticapps.net/", desc: "Created a webpage Prayers in Times of Need. Orthodox Christian Faith." },
+            { name: "Orthodox Church Map Finder", url: "https://thankful-stone-051e70310.1.azurestaticapps.net/", desc: "Created a webpage that will showcase churches that are near in the users area." },
+            { name: "Baptism & Chrismation", url: "https://black-flower-0512a5c10.3.azurestaticapps.net/", desc: "Created a webpage to about Orthodox Church Baptism & Chrismation" },
+            { name: "The Didache", url: "https://wonderful-pond-064747210.1.azurestaticapps.net/", desc: "Created a webpage dedicated to The Didache, an early Christian manual." },
+            { name: "Christian Saints", url: "https://calm-pebble-009e64210.2.azurestaticapps.net/", desc: "Created a webpage dedicated to Christian Saints." },
+            { name: "Early Church Councils", url: "https://victorious-sand-0124d0a1e.3.azurestaticapps.net/", desc: "Created a webpage dedicated to Christian Early Church Councils." },
+            { name: "The Orthodox Church", url: "https://delightful-pond-04c67721e.3.azurestaticapps.net/", desc: "Created a webpage about the Orthodox Christian Church" },
+            { name: "Interest in Orthodoxy", url: "https://porcunanet.github.io/Interest-in-Orthodoxy/", desc: "Created a webpage for people interested in Orthodox Christian liturgy." },
+            { name: "St. Nektarios Biography", url: "https://porcunanet.github.io/St.-Nektarios/", desc: "Created a webpage dedicated to the biography of St. Nektarios." },
+            { name: "The Nativity", url: "https://porcunanet.github.io/The-Nativity-/", desc: "Created a webpage dedicated to The Nativity: God Becomes Human to Show Us the Way" }
+        ];
+
+        const skills = ["HTML/CSS", "JavaScript", "SQL", "Node.js", "Python", "Git", "Microsoft Azure", "Microsoft 365"];
+
+        const socialLinks = [
+            { name: "YouTube", url: "https://www.youtube.com/@A_Perch_Of_Birds", tag: "YT" },
+            { name: "LinkedIn", url: "https://www.linkedin.com/in/porcuna/", tag: "IN" },
+            { name: "GitHub", url: "https://github.com/Porcunanet", tag: "GH" },
+            { name: "Instagram", url: "https://www.instagram.com/a_perch_of_birds/", tag: "IG" }
+        ];
+
+        let activeSection = null;
+
+        function addOutput(html) {
+            const outputDiv = document.createElement('div');
+            outputDiv.className = 'output';
+            outputDiv.innerHTML = html;
+            outputContainer.appendChild(outputDiv);
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+        }
+
+        function executeCommand(cmd) {
+            // If clicking the same command, toggle it off
+            if (activeSection === cmd) {
+                outputContainer.innerHTML = '';
+                activeSection = null;
+                return;
+            }
+
+            // Clear previous output and show new command
+            outputContainer.innerHTML = '';
+            commandInput.value = cmd;
+            processCommand(cmd);
+            commandInput.value = '';
+            commandInput.focus();
+            activeSection = cmd;
+        }
+
+        function processCommand(cmd) {
+            const command = cmd.trim().toLowerCase();
+            commandHistory.push(cmd);
+            historyIndex = commandHistory.length;
+
+            addOutput(`<span class="prompt-symbol">guest@portfolio:~$</span> ${cmd}`);
+
+            switch(command) {
+                case 'help':
+                    addOutput(`
+                        <div class="section-title">Available Commands:</div>
+                        <div style="padding-left: 20px;">
+                        <div><span style="color: #00d9ff;">about</span> - Display information about me</div>
+                        <div><span style="color: #00d9ff;">projects</span> - List all projects</div>
+                        <div><span style="color: #00d9ff;">skills</span> - Show my skills and expertise</div>
+                        <div><span style="color: #00d9ff;">social</span> - Display social media links</div>
+                        <div><span style="color: #00d9ff;">clear</span> - Clear the terminal</div>
+                        <div><span style="color: #00d9ff;">help</span> - Show this help message</div>
+                        </div>
+                    `);
+                    break;
+
+                case 'about':
+                    addOutput(`
+                        <div class="section-title">About Me</div>
+                        <div style="padding-left: 20px;">
+                        As a passionate tech enthusiast, I thrive on teaching others about 
+                        computers, technology, and code, while finding joy in exploring and 
+                        working with data.
+                        </div>
+                    `);
+                    break;
+
+                case 'projects':
+                    let projectsHTML = '<div class="section-title">Featured Projects</div>';
+                    projects.forEach((project, index) => {
+                        projectsHTML += `
+                            <div class="project-entry">
+                                [${index + 1}] <a href="${project.url}" class="project-title" target="_blank">${project.name}</a>
+                                <div class="project-desc">    ${project.desc}</div>
+                            </div>
+                        `;
+                    });
+                    addOutput(projectsHTML);
+                    break;
+
+                case 'skills':
+                    let skillsHTML = '<div class="section-title">Skills & Expertise</div><div style="padding-left: 20px;">';
+                    skills.forEach(skill => {
+                        skillsHTML += `<span class="skill-tag">${skill}</span>`;
+                    });
+                    skillsHTML += '</div>';
+                    addOutput(skillsHTML);
+                    break;
+
+                case 'social':
+                    let socialHTML = '<div class="section-title">Social Links</div><div style="padding-left: 20px;">';
+                    socialLinks.forEach(link => {
+                        socialHTML += `<div>[${link.tag}] <a href="${link.url}" class="social-link" target="_blank">${link.name}</a></div>`;
+                    });
+                    socialHTML += '</div>';
+                    addOutput(socialHTML);
+                    break;
+
+                case 'clear':
+                    outputContainer.innerHTML = '';
+                    break;
+
+                case '':
+                    break;
+
+                default:
+                    addOutput(`<span class="error">Command not found: ${cmd}</span><br><span class="command-hint">Type 'help' for available commands</span>`);
+            }
+        }
+
+        commandInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const cmd = commandInput.value;
+                if (cmd.trim()) {
+                    processCommand(cmd);
+                }
+                commandInput.value = '';
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                if (historyIndex > 0) {
+                    historyIndex--;
+                    commandInput.value = commandHistory[historyIndex];
+                }
+            } else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                if (historyIndex < commandHistory.length - 1) {
+                    historyIndex++;
+                    commandInput.value = commandHistory[historyIndex];
+                } else {
+                    historyIndex = commandHistory.length;
+                    commandInput.value = '';
+                }
+            }
+        });
+
+        // Keep input focused
+        document.addEventListener('click', () => {
+            commandInput.focus();
+        });
+
+        commandInput.focus();
+    </script>
 </body>
-</html>        
-
-
+</html>
