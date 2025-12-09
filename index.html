@@ -1,414 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terminal Portfolio 2025</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: #0c0c0c;
-            font-family: 'Courier New', monospace;
-            color: #00ff00;
-            padding: 20px;
-            line-height: 1.6;
-        }
-
-        .terminal {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: #1a1a1a;
-            border: 2px solid #333;
-            border-radius: 8px;
-            box-shadow: 0 0 30px rgba(0, 255, 0, 0.1);
-        }
-
-        .terminal-header {
-            background: #2d2d2d;
-            padding: 10px 15px;
-            border-bottom: 1px solid #444;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .terminal-button {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            display: inline-block;
-        }
-
-        .btn-close { background: #ff5f56; }
-        .btn-minimize { background: #ffbd2e; }
-        .btn-maximize { background: #27c93f; }
-
-        .terminal-title {
-            flex: 1;
-            text-align: center;
-            color: #888;
-            font-size: 12px;
-        }
-
-        .terminal-body {
-            padding: 20px;
-            min-height: 500px;
-        }
-
-        .prompt {
-            color: #00ff00;
-            margin-bottom: 10px;
-            text-align:center;
-        }
-
-        .prompt-symbol {
-            color: #00d9ff;
-        }
-
-        .output {
-            margin-bottom: 20px;
-            color: #00ff00;
-        }
-
-        .command-input-line {
-            display: flex;
-            align-items: center;
-            margin-top: 15px;
-        }
-
-        .command-input {
-            background: transparent;
-            border: none;
-            color: #00ff00;
-            font-family: 'Courier New', monospace;
-            font-size: 16px;
-            outline: none;
-            flex: 1;
-            padding: 5px;
-        }
-
-        .cursor {
-            display: inline-block;
-            width: 8px;
-            height: 18px;
-            background: #00ff00;
-            animation: blink 1s infinite;
-            margin-left: 2px;
-        }
-
-        @keyframes blink {
-            0%, 49% { opacity: 1; }
-            50%, 100% { opacity: 0; }
-        }
-
-        .ascii-art {
-            color: #00d9ff;
-            font-size: 10px;
-            text-align:center;
-            line-height: 1.2;
-        }
-
-        .menu-item {
-            color: #ffbd2e;
-            cursor: pointer;
-            padding: 5px 0;
-            transition: all 0.2s;
-        }
-
-        .menu-item:hover {
-            color: #fff;
-            padding-left: 10px;
-        }
-
-        .project-entry {
-            margin-bottom: 15px;
-            padding-left: 20px;
-        }
-
-        .project-title {
-            color: #00d9ff;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .project-title:hover {
-            color: #fff;
-            text-decoration: underline;
-        }
-
-        .project-desc {
-            color: #888;
-            margin-left: 5px;
-        }
-
-        .skill-tag {
-            display: inline-block;
-            background: #2d2d2d;
-            color: #00d9ff;
-            padding: 5px 10px;
-            margin: 5px 5px 5px 0;
-            border: 1px solid #444;
-            border-radius: 3px;
-        }
-
-        .social-link {
-            color: #ffbd2e;
-            text-decoration: none;
-            margin-right: 15px;
-        }
-
-        .social-link:hover {
-            color: #fff;
-        }
-
-        .section-title {
-            color: #00d9ff;
-            font-size: 18px;
-            margin: 25px 0 15px 0;
-            border-bottom: 1px solid #333;
-            padding-bottom: 5px;
-        }
-
-        .command-hint {
-            color: #666;
-            font-style: italic;
-        }
-
-        .error {
-            color: #ff5f56;
-        }
-
-        .success {
-            color: #27c93f;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .typing {
-            overflow: hidden;
-            white-space: nowrap;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio - Windows 95</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <script src="app.js" defer></script>
 </head>
+
+
 <body>
-    <div class="terminal">
-        <div class="terminal-header">
-            <span class="terminal-button btn-close"></span>
-            <span class="terminal-button btn-minimize"></span>
-            <span class="terminal-button btn-maximize"></span>
-            <span class="terminal-title">portfolio@terminal:~</span>
-        </div>
-        <div class="terminal-body" id="terminalBody">
-            <div class="output">
-                <pre class="ascii-art">
- ____   ___  ____ _____ _____ ___  _     ___ ___  
-|  _ \ / _ \|  _ \_   _|  ___/ _ \| |   |_ _/ _ \ 
-| |_) | | | | |_) || | | |_ | | | | |    | | | | |
-|  __/| |_| |  _ < | | |  _|| |_| | |___ | | |_| |
-|_|    \___/|_| \_\|_| |_|   \___/|_____|___\___/ 
-                                                   
-                </pre>
-                <div class="prompt">Welcome to my Terminal v2025</div>
-                <div class="prompt">Click on any command below or type it in the prompt:</div>
-                <br>
-                <div class="section-title">Available Commands:</div>
-                <div style="padding-left: 20px;">
-                    <div class="menu-item" onclick="executeCommand('about')">► <span style="color: #00d9ff;">about</span> - Display information about me</div>
-                    <div class="menu-item" onclick="executeCommand('projects')">► <span style="color: #00d9ff;">projects</span> - List all projects</div>
-                    <div class="menu-item" onclick="executeCommand('skills')">► <span style="color: #00d9ff;">skills</span> - Show my skills and expertise</div>
-                    <div class="menu-item" onclick="executeCommand('social')">► <span style="color: #00d9ff;">social</span> - Display social media links</div>
-                    <div class="menu-item" onclick="executeCommand('clear')">► <span style="color: #00d9ff;">clear</span> - Clear the terminal</div>
-                    <div class="menu-item" onclick="executeCommand('help')">► <span style="color: #00d9ff;">help</span> - Show this help message</div>
-                </div>
-            </div>
-
-            <div id="outputContainer"></div>
-
-            <div class="command-input-line">
-                <span class="prompt-symbol">guest@portfolio:~$</span>
-                <input type="text" class="command-input" id="commandInput" autofocus autocomplete="off">
-                <span class="cursor"></span>
-            </div>
-        </div>
+  <div class="window">
+    <div class="title-bar">
+      <div class="title-bar-text">
+        <span>📁</span>
+        My Portfolio
+      </div>
+      <div class="title-bar-controls">
+        <button>_</button>
+        <button>□</button>
+        <button>X</button>
+      </div>
     </div>
 
-    <script>
-        const commandInput = document.getElementById('commandInput');
-        const outputContainer = document.getElementById('outputContainer');
-        const terminalBody = document.getElementById('terminalBody');
-        let commandHistory = [];
-        let historyIndex = -1;
+    <header>
+      <img src="images/Soothe-Me.jpg" alt="Profile Picture" class="profile-pic">
+      <div class="header-text">
+        <h1>Patrick Porcuna</h1>
+        <p>IT Tech, Develop, Data</p>
+      </div>
+    </header>
 
-        const projects = [
-            { name: "FrontendMentor - Single Price Grid", url: "https://porcunanet.github.io/Frontend-Mentor---Single-Price-Grid/", desc: "Frontend Mentor project of a single price grid component." },
-            { name: "FrontendMentor - 3 Column preview card", url: "https://github.com/Porcunanet/3-column-preview-card-component-main.git", desc: "Frontend Mentor project of a 3 Column preview card component." },
-            { name: "FrontendMentor - Recipe Page", url: "https://porcunanet.github.io/Frontend-Mentor---Recipe-Page/", desc: "Frontend Mentor project of a Recipe Page." },
-            { name: "Frontend Mentor - Social links profile main", url: "https://porcunanet.github.io/FrontendMentor_social-links-profile-main/", desc: "Frontend Mentor project of a Social media profile in dark mode." },
-            { name: "System Report script", url: "https://github.com/Porcunanet/System-Report-tool-for-MacOS-Linux.git", desc: "A script use to get System Information on MacOS, Linux, and Windows." },
-            { name: "Computer Hardware Tutorial", url: "https://ambitious-smoke-06565fd10.3.azurestaticapps.net/", desc: "Webpage dedicated to anyone interested in learning about computer hardware" },
-            { name: "Web Development for Beginners", url: "https://mango-desert-08327be10.2.azurestaticapps.net/", desc: "Webpage dedicated to anyone interested in learning about Web Development for beginners" },
-            { name: "Prayers in Times of Need", url: "https://purple-meadow-033f41610.3.azurestaticapps.net/", desc: "Created a webpage Prayers in Times of Need. Orthodox Christian Faith." },
-            { name: "Orthodox Church Map Finder", url: "https://thankful-stone-051e70310.1.azurestaticapps.net/", desc: "Created a webpage that will showcase churches that are near in the users area." },
-            { name: "Baptism & Chrismation", url: "https://black-flower-0512a5c10.3.azurestaticapps.net/", desc: "Created a webpage to about Orthodox Church Baptism & Chrismation" },
-            { name: "The Didache", url: "https://wonderful-pond-064747210.1.azurestaticapps.net/", desc: "Created a webpage dedicated to The Didache, an early Christian manual." },
-            { name: "Christian Saints", url: "https://calm-pebble-009e64210.2.azurestaticapps.net/", desc: "Created a webpage dedicated to Christian Saints." },
-            { name: "Early Church Councils", url: "https://victorious-sand-0124d0a1e.3.azurestaticapps.net/", desc: "Created a webpage dedicated to Christian Early Church Councils." },
-            { name: "The Orthodox Church", url: "https://delightful-pond-04c67721e.3.azurestaticapps.net/", desc: "Created a webpage about the Orthodox Christian Church" },
-            { name: "Interest in Orthodoxy", url: "https://porcunanet.github.io/Interest-in-Orthodoxy/", desc: "Created a webpage for people interested in Orthodox Christian liturgy." },
-            { name: "St. Nektarios Biography", url: "https://porcunanet.github.io/St.-Nektarios/", desc: "Created a webpage dedicated to the biography of St. Nektarios." },
-            { name: "The Nativity", url: "https://porcunanet.github.io/The-Nativity-/", desc: "Created a webpage dedicated to The Nativity: God Becomes Human to Show Us the Way" }
-        ];
+    <nav>
+      <button class="nav-btn active" data-page="home">Home</button>
+      <button class="nav-btn" data-page="projects">Projects</button>
+      <button class="nav-btn" data-page="contact">Contact</button>
+    </nav>
 
-        const skills = ["HTML/CSS", "JavaScript", "SQL", "Node.js", "Python", "Git", "Microsoft Azure", "Microsoft 365"];
+    <main>
+      <section id="home" class="page active">
+        <h2>Skills & Expertise</h2>
+        <p>Versatile IT professional with expertise across development, cloud infrastructure, and technical support.</p>
+        
+        <div class="skills-grid">
+          <div class="skill-card">
+            <h3>☁️ Azure Cloud</h3>
+            <p>Cloud infrastructure management, Azure services deployment, and resource optimization</p>
+          </div>
+          <div class="skill-card">
+            <h3>🐍 Python</h3>
+            <p>Python programming for automation, scripting, data analysis, and backend development</p>
+          </div>
+          <div class="skill-card">
+            <h3>⌨️ Terminal</h3>
+            <p>Command-line proficiency, shell scripting, and system automation via terminal environments</p>
+          </div>
+           <div class="skill-card">
+            <h3>📧 Microsoft 365</h3>
+            <p>Microsoft 365 administration, SharePoint, Teams, Exchange, and productivity suite management</p>
+          </div>
+          <div class="skill-card">
+            <h3>💻 Web Development</h3>
+            <p>HTML, CSS, and JavaScript for building responsive and interactive web applications</p>
+          </div>
+          <div class="skill-card">
+            <h3>🪟 Windows</h3>
+            <p>Windows system administration, troubleshooting, and enterprise environment management</p>
+          </div>
+          <div class="skill-card">
+            <h3>🍎 macOS</h3>
+            <p>Mac system support, configuration, and cross-platform integration solutions</p>
+          </div>
+          <div class="skill-card">
+            <h3>📊 Data Entry</h3>
+            <p>Accurate data management, database maintenance, and information processing</p>
+          </div>
+          <div class="skill-card">
+            <h3>🛠️ IT Helpdesk</h3>
+            <p>Technical support, user assistance, and problem resolution for diverse technical issues</p>
+          </div>
+        </div>
+        
+        <h2 style="margin-top: 40px;">Featured Projects</h2>
+        <div class="carousel-container">
+          <div class="carousel" id="carousel"></div>
+          <div class="carousel-controls">
+            <button id="prevBtn">◄ Prev</button>
+            <button id="nextBtn">Next ►</button>
+          </div>
+        </div>
+      </section>
 
-        const socialLinks = [
-            { name: "YouTube", url: "https://www.youtube.com/@A_Perch_Of_Birds", tag: "YT" },
-            { name: "LinkedIn", url: "https://www.linkedin.com/in/porcuna/", tag: "IN" },
-            { name: "GitHub", url: "https://github.com/Porcunanet", tag: "GH" },
-            { name: "Instagram", url: "https://www.instagram.com/a_perch_of_birds/", tag: "IG" }
-        ];
+      <section id="projects" class="page">
+        <h2>All Projects</h2>
+        <div class="projects-grid" id="projectsGrid"></div>
+      </section>
 
-        let activeSection = null;
+      <section id="contact" class="page">
+        <h2>Contact Me</h2>
+        <p style="margin-bottom: 30px;">Feel free to connect with me on social media!</p>
+        <div class="contact-social">
+          <a href="#" class="social-circle-large" title="GitHub">
+            <div>GH</div>
+            <span>GitHub</span>
+          </a>
+          <a href="#" class="social-circle-large" title="LinkedIn">
+            <div>LI</div>
+            <span>LinkedIn</span>
+          </a>
+          <a href="#" class="social-circle-large" title="YouTube">
+            <div>YT</div>
+            <span>YouTube</span>
+          </a>
+          <a href="#" class="social-circle-large" title="Instagram">
+            <div>IG</div>
+            <span>Instagram</span>
+          </a>
+        </div>
+      </section>
+    </main>
 
-        function addOutput(html) {
-            const outputDiv = document.createElement('div');
-            outputDiv.className = 'output';
-            outputDiv.innerHTML = html;
-            outputContainer.appendChild(outputDiv);
-            terminalBody.scrollTop = terminalBody.scrollHeight;
-        }
+    <footer>
+      <div class="footer-bio">
+        <p><strong>About Me:</strong> Crafting digital experiences with code and creativity. Always learning, always building.</p>
+      </div>
+      <div class="datetime" id="datetime"></div>
+    </footer>
+  </div>
 
-        function executeCommand(cmd) {
-            // If clicking the same command, toggle it off
-            if (activeSection === cmd) {
-                outputContainer.innerHTML = '';
-                activeSection = null;
-                return;
-            }
-
-            // Clear previous output and show new command
-            outputContainer.innerHTML = '';
-            commandInput.value = cmd;
-            processCommand(cmd);
-            commandInput.value = '';
-            commandInput.focus();
-            activeSection = cmd;
-        }
-
-        function processCommand(cmd) {
-            const command = cmd.trim().toLowerCase();
-            commandHistory.push(cmd);
-            historyIndex = commandHistory.length;
-
-            addOutput(`<span class="prompt-symbol">guest@portfolio:~$</span> ${cmd}`);
-
-            switch(command) {
-                case 'help':
-                    addOutput(`
-                        <div class="section-title">Available Commands:</div>
-                        <div style="padding-left: 20px;">
-                        <div><span style="color: #00d9ff;">about</span> - Display information about me</div>
-                        <div><span style="color: #00d9ff;">projects</span> - List all projects</div>
-                        <div><span style="color: #00d9ff;">skills</span> - Show my skills and expertise</div>
-                        <div><span style="color: #00d9ff;">social</span> - Display social media links</div>
-                        <div><span style="color: #00d9ff;">clear</span> - Clear the terminal</div>
-                        <div><span style="color: #00d9ff;">help</span> - Show this help message</div>
-                        </div>
-                    `);
-                    break;
-
-                case 'about':
-                    addOutput(`
-                        <div class="section-title">About Me</div>
-                        <div style="padding-left: 20px;">
-                        As a passionate tech enthusiast, I thrive on teaching others about 
-                        computers, technology, and code, while finding joy in exploring and 
-                        working with data.
-                        </div>
-                    `);
-                    break;
-
-                case 'projects':
-                    let projectsHTML = '<div class="section-title">Featured Projects</div>';
-                    projects.forEach((project, index) => {
-                        projectsHTML += `
-                            <div class="project-entry">
-                                [${index + 1}] <a href="${project.url}" class="project-title" target="_blank">${project.name}</a>
-                                <div class="project-desc">    ${project.desc}</div>
-                            </div>
-                        `;
-                    });
-                    addOutput(projectsHTML);
-                    break;
-
-                case 'skills':
-                    let skillsHTML = '<div class="section-title">Skills & Expertise</div><div style="padding-left: 20px;">';
-                    skills.forEach(skill => {
-                        skillsHTML += `<span class="skill-tag">${skill}</span>`;
-                    });
-                    skillsHTML += '</div>';
-                    addOutput(skillsHTML);
-                    break;
-
-                case 'social':
-                    let socialHTML = '<div class="section-title">Social Links</div><div style="padding-left: 20px;">';
-                    socialLinks.forEach(link => {
-                        socialHTML += `<div>[${link.tag}] <a href="${link.url}" class="social-link" target="_blank">${link.name}</a></div>`;
-                    });
-                    socialHTML += '</div>';
-                    addOutput(socialHTML);
-                    break;
-
-                case 'clear':
-                    outputContainer.innerHTML = '';
-                    break;
-
-                case '':
-                    break;
-
-                default:
-                    addOutput(`<span class="error">Command not found: ${cmd}</span><br><span class="command-hint">Type 'help' for available commands</span>`);
-            }
-        }
-
-        commandInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                const cmd = commandInput.value;
-                if (cmd.trim()) {
-                    processCommand(cmd);
-                }
-                commandInput.value = '';
-            } else if (e.key === 'ArrowUp') {
-                e.preventDefault();
-                if (historyIndex > 0) {
-                    historyIndex--;
-                    commandInput.value = commandHistory[historyIndex];
-                }
-            } else if (e.key === 'ArrowDown') {
-                e.preventDefault();
-                if (historyIndex < commandHistory.length - 1) {
-                    historyIndex++;
-                    commandInput.value = commandHistory[historyIndex];
-                } else {
-                    historyIndex = commandHistory.length;
-                    commandInput.value = '';
-                }
-            }
-        });
-
-        // Keep input focused
-        document.addEventListener('click', () => {
-            commandInput.focus();
-        });
-
-        commandInput.focus();
-    </script>
 </body>
 </html>
