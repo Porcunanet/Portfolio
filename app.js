@@ -82,7 +82,7 @@
         <div class="project-card">
           <h3>${p.title}</h3>
           <p>${p.description}</p>
-          <a href="${p.url}">View Project</a>
+          <a href="${p.url}" target="_blank">View Project</a>
         </div>
       `).join('');
     }
