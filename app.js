@@ -1,11 +1,24 @@
   // Sample projects data
     const projects = [
-      { title: "E-Commerce Platform", description: "A full-stack online store with cart and payment integration", url: "#" },
-      { title: "Weather App", description: "Real-time weather updates with beautiful UI", url: "#" },
-      { title: "Task Manager", description: "Organize your tasks with drag and drop", url: "#" },
-      { title: "Portfolio CMS", description: "Content management system for portfolios", url: "#" },
-      { title: "Chat Application", description: "Real-time messaging with WebSocket", url: "#" },
-      { title: "Music Player", description: "Streaming music player with playlists", url: "#" }
+      { title: "Computer Evolution", description: "Introduction to The Evolution of Computing", url: "https://porcunanet.github.io/The-Evolution-of-Computing/"},
+      { title: "Computer Basics", description: "Computer Basics", url: "https://porcunanet.github.io/Computer-Basics/"},
+      { title: "Computer Hardware Basics", description: "Computer Hardware Basics", url: "https://porcunanet.github.io/Computer-Hardware-Basics/"},
+      { title: "Introduction to HTML", description: "Introduction to HTML", url: "https://porcunanet.github.io/Web-Development-Lessons/" },
+      { title: "System Report Tool", description: "System Report Tool for MacOS & Linux", url: "https://github.com/Porcunanet/System-Report-tool-for-MacOS-Linux.git" },
+      { title: "FEM - NFT card", description: "Front-End Mentor Challenge - NFT Card", url: "https://porcunanet.github.io/FrontEndMentor---nft-preview-card-component/"},
+      { title: "FEM - Single Price Grid", description: "Front-End Mentor Challenge - Single Price Grid", url:"https://porcunanet.github.io/Frontend-Mentor---Single-Price-Grid/"},
+      { title: "FEM - Recipe Page", description: "Front-End Mentor Challenge - Recipe Page", url: "https://porcunanet.github.io/Frontend-Mentor---Recipe-Page/"},
+      { title: "FEM - 3 Column Card", description: "Front-End Mentor Challenge - 3 Column Card", url: "https://porcunanet.github.io/3-column-preview-card-component-main/"},
+      { title: "Interest in Orthodox Christianity", description: "Introduction to Orthodoxy", url: "https://porcunanet.github.io/Interest-in-Orthodoxy/" },
+      { title: "Overview of the Bible", description: "An overview of the Bible", url: "https://porcunanet.github.io/Overview-of-the-Bible/" },
+      { title: "Orthodox Church Finder", description: "Orthodox Church Finder Tool", url: "https://porcunanet.github.io/Orthodox-Church-Finder/" },
+      { title: "The Didache", description: "The Lord's Teaching Through the Twelve Apostles to the Nations", url: "https://porcunanet.github.io/The-Didache/" },
+      { title: "Church Councils", description: "Early Christian Church Councils", url:"https://porcunanet.github.io/Early-Church-Councils/"},
+      { title: "The Nativity", description: "God becomes human to show us the Way", url: "https://porcunanet.github.io/The-Nativity-/"},
+      { title: "St. Nektarios", description: "St.Nektarios tribute", url:"https://porcunanet.github.io/St.-Nektarios/"},
+      { title: "Prayers in Times of Need", description: "Prayers in Times of Need", url: "https://porcunanet.github.io/Prayers-in-Times-of-Need/"},
+      { title: "Baptism & Chrismation in the Orthodox Church", description: "Understanding Orthodox Baptism & Chrismation", url: "https://porcunanet.github.io/Baptism-Chrismation-in-the-Orthodox-Church/"}
+
     ];
 
     // Carousel functionality
